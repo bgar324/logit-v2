@@ -1,0 +1,72 @@
+this separate page will consist of three parts, with the dashboard portion taking a significant chunk of it
+lets get into it
+
+authentication ([lift.logit.com] <-- landing): 
+- centered rounded modal, simple auth form.
+- "Welcome Back" -> sign in, new here? create an account. typical stuff
+
+if: signed in -> route to dashboard
+if: new here -> route to onboarding
+
+onboarding ([lift.logit.com/onboarding]):
+- **we will not share user data**. but we need it to make this AI feedback actually personal, and not generalized
+(1) Height, Weight, Gender, Age, Activity Level. (split onboarding into sections, so here its fishing for like, getting a sense of who they are, and peering a little bit into generalized activity, so just walking, etc)
+(2) Gym exposure (ie: novice, beginner, intermediate, can add more stuff), How often they go to the gym (though this is probably overlap with Activity Level, but if we want more personal things, then yeah, this could be separate)
+(3) Weight goals: cutting, maintaining, bulking. what their caloric intake is right now (note: based on point 1, we can already calculate their base calorie stuff), then give a final pie chart thing to show protein intake per day (maybe) 
+(4) throughout the form, right now, im thinking only on the caloric intake part, we can do a soft block if they try to give some outlandish fucking number. like a caloric intake of 300 per day. unreal
+- i think this is it. not sure though.
+
+dashboard
+- sidebar
+- bento style? 
+- theme should be professional and minimalistic
+- rounded boxes (will refer to this as sections from now on)
+- section for AI feedback
+    * how does this work
+        * AI will do a weekly recap and look forward
+        * so for example: 
+            * in the past week you went to the gym 3 times and improved lifts with xyz based on the week prior (?? wording could be better here)
+            * looking forward, expect your lifts to improve as you are bulking or whatever. or stay the same / become more difficult as you are on week xyz of you aggressive cut (which is determined from the onboarding)
+- section for actually logging
+    * this will go to a separate page, unsure about how to design this since it will be pretty stale. 
+    * tags system, comment system, bring these in from v1. rir for v2 maybe, i dont use rir when i workout so idk
+- calendar section, bring up past workouts to just a view only for fast look up
+    * can also implement a tag lookup system so if they are on the go, they can just look up 
+        * "oh, when was my last push day"
+- graphs section
+    * toggle between vs time
+        * weight over time
+        * movement (bench , lat pulldown) over time
+- i will implement calorie tracking last, since other apps do it better im not sure how to implement in general
+    * but this has to be done though. we want a centralized system to just capture everything
+
+design style:
+    notion, very minimalistic but professional.    
+
+🧭 Suggested Dev Order
+✅ Set up Next.js project
+
+✅ Install Prisma/SQLite
+
+🔐 Build Auth modal + redirect logic
+
+📥 Implement Onboarding flow (/onboarding)
+
+🧠 Store Profile model
+
+🖥️ Scaffold Dashboard layout (Sidebar + Section placeholders)
+
+🤖 Start designing how the AI reads from logs/profile
+
+📝 Logging interface
+
+📆 Calendar/graph viewer
+
+📈 Eventually: Calorie tracking
+
+tech stack (update as we go):
+nextjs, prisma, tailwind css, postgresql, supabase auth (and database hosting)
+
+todo: protecting pages
+
+--

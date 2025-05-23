@@ -1,0 +1,42 @@
+landing:
+60 ([1]) 40 ([2] = actual sign in) split
+
+use framer motion or something to animate this in order very important
+
+[1] LHS bg is white
+black text
+(in order) goes from opacity to 100 in a calm-ish manner (only 1 and 2)
+(1)  Hello.
+(2)  Welcome to logit.
+
+then have this part centered on the LHS [1]
+#A
+logit
+Get Started with Us
+Complete these easy steps to register your account
+
+(these steps are rounded ui's) 
+(1) Sign up your account
+(2) Complete onboarding
+(3) Access AI fueled insights and training
+
+for #A, have them come up one by one, delayed for each other
+
+now for [2]
+
+bg is black
+text is white
+have this entire section (the 40 split section, all come up from the bottom all at once, in its own div)
+
+"Sign Up Account"
+Google Button maybe? need to figure out how to tackle this with supabase auth
+First name last name split on same row separate input fields (so these are 1/2 1/2 width)
+email full width
+password full width
+"must be at least 8 characters text below that"
+
+white sign up black text button below all this
+
+below that smaller text already have an account log in. though backend logic should automatically redirect if signed in
+
+end of landing: make sure this takes full width of the screen and is responsive

@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}     
+
+model Profile {
+  id            String    @id
+  userId        String    @unique // Clerk user ID
+  height        Float     // in cm
+  weight        Float     // in kg
+  gender        String
+  age           Int
+  activityLevel String    // sedentary, lightly active, moderately active, very active
+  gymExperience String    // novice, beginner, intermediate, advanced
+  gymFrequency  Int       // times per week
+  weightGoal    String    // cutting, maintaining, bulking
+  calorieIntake Int       // daily target
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  workouts      Workout[]
+}
+
+model Workout {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  notes     String?
+  type      String   // push, pull, legs, etc.
+  tags      String[] // Array of tags for the workout
+  rir       Int?     // Rate of perceived exertion (optional)
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  profileId String
+  exercises Exercise[]
+}
+
+model Exercise {
+  id        String   @id @default(uuid())
+  name      String
+  sets      Int
+  reps      Int
+  weight    Float
+  workout   Workout  @relation(fields: [workoutId], references: [id])
+  workoutId String
+}
