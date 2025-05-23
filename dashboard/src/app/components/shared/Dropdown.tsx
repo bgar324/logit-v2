@@ -16,7 +16,7 @@ type DropdownProps<T extends string> = {
     required = false,
   }: DropdownProps<T>) {
     return (
-      <div className="space-y-2">
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20 space-y-2">
         <label className="block text-sm font-medium">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}

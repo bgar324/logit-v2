@@ -7,7 +7,7 @@ type SkipButtonProps = {
       <button
         type="button"
         onClick={onClick}
-        className="text-sm text-gray-500 hover:text-black underline mt-2"
+        className="text-sm text-white/60 hover:text-white/80 cursor-pointer underline mt-2"
       >
         Skip
       </button>

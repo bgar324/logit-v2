@@ -8,13 +8,13 @@ type ProgressBarProps = {
   
     return (
       <div className="w-full mb-6">
-        <div className="flex justify-between text-xs text-gray-500 mb-1">
+        <div className="flex justify-between text-xs text-white/60 mb-1">
           <span>Step {current} of {total}</span>
           <span>{Math.round(percentage)}%</span>
         </div>
-        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+        <div className="w-full bg-gray-600 h-2 rounded-full overflow-hidden">
           <div
-            className="bg-black h-2 transition-all"
+            className="bg-white h-2 transition-all"
             style={{ width: `${percentage}%` }}
           />
         </div>

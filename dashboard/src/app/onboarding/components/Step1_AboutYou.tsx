@@ -18,7 +18,7 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
   const [skippedBodyFat, setSkippedBodyFat] = useState(false);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <ProgressBar current={1} total={4} />
       <SectionHeader
         title="About You"
@@ -26,8 +26,10 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
       />
 
       {/* Height */}
-      <div>
-        <label className="block text-sm font-medium mb-1">What’s your height? (cm)</label>
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20">
+        <label className="block text-sm font-medium mb-1">
+          What’s your height? (cm)
+        </label>
         <input
           type="number"
           value={data.height ?? ""}
@@ -41,8 +43,10 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
       </div>
 
       {/* Weight */}
-      <div>
-        <label className="block text-sm font-medium mb-1">What’s your weight? (kg)</label>
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20">
+        <label className="block text-sm font-medium mb-1">
+          What’s your weight? (kg)
+        </label>
         <input
           type="number"
           value={data.weight ?? ""}
@@ -57,38 +61,44 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
 
       {/* Body Fat Percentage (Optional) */}
       {!skippedBodyFat ? (
-        <div>
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20">
           <label className="block text-sm font-medium mb-1">
             What’s your body fat percentage? (optional)
           </label>
           <input
             type="number"
             value={data.bodyFatPercentage ?? ""}
-            onChange={(e) => update({ bodyFatPercentage: Number(e.target.value) })}
+            onChange={(e) =>
+              update({ bodyFatPercentage: Number(e.target.value) })
+            }
             placeholder="e.g., 15"
             min={5}
             max={50}
             className="w-full p-3 rounded-md border border-gray-300"
           />
-          <SkipButton onClick={() => {
-            setSkippedBodyFat(true);
-            update({ bodyFatPercentage: null });
-          }} />
+          <SkipButton
+            onClick={() => {
+              setSkippedBodyFat(true);
+              update({ bodyFatPercentage: null });
+            }}
+          />
         </div>
       ) : null}
 
       {/* Gender */}
-      <Dropdown<'male' | 'female' | 'other'>
+      <Dropdown<"male" | "female" | "other">
         label="What's your gender?"
-        value={data.gender as 'male' | 'female' | 'other' | null}
+        value={data.gender as "male" | "female" | "other" | null}
         onChange={(val) => update({ gender: val })}
         options={["male", "female", "other"] as const}
         required
       />
 
       {/* Age */}
-      <div>
-        <label className="block text-sm font-medium mb-1">What’s your age?</label>
+      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20">
+        <label className="block text-sm font-medium mb-1">
+          What’s your age?
+        </label>
         <input
           type="number"
           value={data.age ?? ""}
@@ -102,17 +112,21 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
       </div>
 
       {/* Activity Level */}
-      <Dropdown<'sedentary' | 'light' | 'moderate' | 'active' | 'very_active'>
+      <Dropdown<"sedentary" | "light" | "moderate" | "active" | "very_active">
         label="What's your activity level?"
-        value={data.activityLevel as 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null}
+        value={
+          data.activityLevel as
+            | "sedentary"
+            | "light"
+            | "moderate"
+            | "active"
+            | "very_active"
+            | null
+        }
         onChange={(val) => update({ activityLevel: val })}
-        options={[
-          "sedentary",
-          "light",
-          "moderate",
-          "active",
-          "very_active"
-        ] as const}
+        options={
+          ["sedentary", "light", "moderate", "active", "very_active"] as const
+        }
         required
       />
 
