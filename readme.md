@@ -1,4 +1,4 @@
-# LogIt
+# log•it!
 
 A sophisticated fitness tracking platform with AI-powered insights, featuring a clean and minimalistic design inspired by Notion's design language.
 
@@ -50,4 +50,4 @@ Designed for fitness enthusiasts of all levels:
 
 ---
 
-*LogIt - Your intelligent fitness companion*
+*log•it! - Your intelligent fitness companion*
