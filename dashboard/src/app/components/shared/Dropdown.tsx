@@ -1,41 +1,56 @@
+// components/shared/Dropdown.tsx
+"use client";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // adjust if you customized shadcn paths
+
 type DropdownProps<T extends string> = {
-    label: string;
-    options: readonly T[];
-    value: T | null;
-    onChange: (val: T) => void;
-    placeholder?: string;
-    required?: boolean;
-  };
-  
-  export default function Dropdown<T extends string>({
-    label,
-    options,
-    value,
-    onChange,
-    placeholder = "Select an option",
-    required = false,
-  }: DropdownProps<T>) {
-    return (
-      <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20 space-y-2">
-        <label className="block text-sm font-medium">
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-        <select
-          value={value ?? ""}
-          onChange={(e) => onChange(e.target.value as T)}
-          required={required}
-          className="w-full p-3 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-1 focus:ring-black"
-        >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {options.map((opt: T) => (
-            <option key={opt} value={opt}>
+  label: string;
+  options: readonly T[];
+  value: T | null;
+  onChange: (val: T) => void;
+  placeholder?: string;
+  required?: boolean;
+};
+
+export default function Dropdown<T extends string>({
+  label,
+  options,
+  value,
+  onChange,
+  placeholder = "Select an option",
+  required = false,
+}: DropdownProps<T>) {
+  return (
+    <div className="space-y-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 transition focus-within:ring-2 ring-white/20 ">
+      <label className="block text-sm font-medium">
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      <Select
+        value={value ?? ""}
+        onValueChange={(val) => onChange(val as T)}
+      >
+        <SelectTrigger className="w-full p-3 rounded-md border border-gray-300 bg-white/5 text-base">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent className="bg-neutral-900 text-white border border-white/10">
+          {options.map((opt) => (
+            <SelectItem
+              key={opt}
+              value={opt}
+              className="hover:bg-white/10 cursor-pointer"
+            >
               {opt}
-            </option>
+            </SelectItem>
           ))}
-        </select>
-      </div>
-    );
-  }
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}

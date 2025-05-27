@@ -22,3 +22,52 @@ put navigation in lhs
 fix the port to database
 
 also make the lhs actually change colors, should be a quick fix i think
+
+Section 1: Your Profile
+Purpose: Establish the user’s physical and lifestyle baseline for AI-driven calculations (e.g., TDEE, body composition).
+Mini-Clusters:
+
+🧍 Physical Stats (Core metrics for body composition)
+What’s your height? (height: number | null, Required, 100–250 cm)
+What’s your weight? (weight: number | null, Required, 30–200 kg)
+What’s your body fat percentage? (Optional) (bodyFatPercentage: number | null, Optional, 5–50%)
+Why? Groups measurable physical attributes needed for TDEE and progress tracking. Separating these from lifestyle context reduces form complexity. AI uses these for calorie estimates (e.g., “At 175 cm, 70 kg, your TDEE is ~2200 kcal”) and body composition feedback.
+
+🎯 Personal Context (Lifestyle factors for metabolic and demographic tailoring)
+What’s your gender? (gender: string | null, Required, Dropdown: Male, Female, Other)
+What’s your age? (age: number | null, Required, 13–100)
+What’s your activity level? (activityLevel: string | null, Required, Dropdown: Sedentary, Lightly active, Moderately active, Very active)
+Why? Clusters lifestyle factors that refine AI calculations (e.g., gender/age adjust Mifflin-St Jeor formula; activity level scales TDEE). Separating from physical stats makes the form feel less clinical and more about “who you are.”
+UX Notes: Use Tailwind for a clean, two-column layout (Physical Stats on left, Personal Context on right for desktop; stacked for mobile). Add tooltips for activityLevel (e.g., “Sedentary: Desk job”). Show a privacy notice: “Your data is private and used only for personalization.”
+
+Section 2: Your Training
+Purpose: Capture training habits and constraints to tailor AI workout recommendations.
+Mini-Clusters:
+
+💪 Training Experience (Skill and consistency)
+What’s your gym experience? (gymExperience: string | null, Required, Dropdown: Novice: <3 months, Beginner: 3–12 months, Intermediate: 1–2 years, Advanced: 2+ years)
+How many days per week do you train? (gymFrequency: number | null, Required, Slider: 0–7)
+Why? Groups metrics of training proficiency and frequency, enabling AI to suggest appropriate exercises (e.g., “Beginner? Focus on form”) and assess consistency (e.g., “3x/week is great for recovery”).
+🏋️ Training Conditions (Constraints for safety and feasibility)
+Do you have any health conditions or injuries? (healthConditions: string[], Required, Multi-select: Lower back issues, Knee pain, None)
+Where do you work out? (Optional) (workoutEnvironment: string | null, Optional, Dropdown: Gym, Home, Both, Skip)
+When do you prefer to work out? (Optional) (preferredWorkoutTime: string | null, Optional, Dropdown: Morning, Afternoon, Evening, Any time, Skip)
+Why? Clusters factors that ensure safe, practical recommendations (e.g., avoiding heavy lifts for back issues, bodyweight exercises for home users). Separating from experience keeps the focus on constraints.
+UX Notes: Use a single-column layout with clear subheadings (e.g., “Training Experience” and “Training Conditions”). Include examples for gymExperience (e.g., “Intermediate: Comfortable with squats”). Default healthConditions to “None” and make optional fields skippable with Tailwind-styled “Skip” buttons.
+
+Section 3: Your Goals and Preferences
+Purpose: Define fitness and nutritional goals, plus feedback preferences, for personalized AI guidance.
+Mini-Clusters:
+
+🎯 Fitness Goals (Primary objectives)
+What’s your goal? (weightGoal: string | null, Required, Radio: Cutting, Maintaining, Bulking)
+What’s your daily calorie intake? (kcal) (calorieIntake: number | null, Required, Number, 1000–4000 kcal)
+Why? Groups goal-oriented questions that drive AI progress tracking (e.g., “Cutting? Stay in a 300–500 kcal deficit”). calorieIntake ties directly to goals, with TDEE validation for accuracy.
+🍽️ Nutrition Preferences (Dietary context)
+What are your dietary preferences? (dietaryPreferences: string[], Required, Multi-select: Vegetarian, Vegan, Keto, None)
+What are 3–5 foods you eat often? (Optional) (favoriteFoods: string[], Optional, Text/tag input, Max 5)
+Why? Clusters dietary data to tailor AI nutrition advice (e.g., “Vegetarian? Try lentils for protein”). Separating from goals keeps the focus on food-related inputs.
+🧠 Feedback Style (Customization of AI interaction)
+How detailed do you want your feedback? (Optional) (feedbackStyle: string | null, Optional, Radio: Detailed, Concise, Skip)
+How often will you track calories? (Optional) (calorieTrackingFrequency: string | null, Optional, Dropdown: Daily, Weekly, Goal-based, Not sure, Skip)
+Why? Groups preferences that customize AI delivery, ensuring feedback matches user needs (e.g., “Concise: Brief weekly recaps”). Including here ties personalization to goals, feeling like a natural conclusion.

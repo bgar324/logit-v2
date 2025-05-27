@@ -222,6 +222,10 @@ export default function AuthForm({ isSignUp, setIsSignUp }: AuthFormProps) {
                   {isSignUp ? "Log In." : "Sign Up."}
                 </button>
               </p>
+              <p className="text-xs italic text-center text-white/60 absolute flex flex-col">
+                DEV MODE: go to <a href = "/onboarding" className = "text-white hover:underline cursor-pointer">onboarding</a>
+                DEV MODE: go to <a href = "/dashboard" className = "text-white hover:underline cursor-pointer">dashboard</a>
+              </p>
             </form>
           </>
         )}
