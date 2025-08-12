@@ -29,8 +29,8 @@ export default function OnboardingLeft({
   };
   return (
     <motion.div
-      className="relative p-12 flex flex-col justify-center rounded-4xl overflow-hidden items-center"
-      initial={{ width: "100%", opacity: 0 }}
+      className="fixed p-12 flex flex-col justify-center rounded-4xl overflow-hidden items-center min-h-[98.5vh]"
+      initial={{ width: "99.25%", opacity: 0 }}
       animate={{
         width: "40%",
         opacity: 1,

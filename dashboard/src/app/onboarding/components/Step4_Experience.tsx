@@ -10,7 +10,6 @@ import { OnboardingFormData } from "../types/onboarding";
 type Step4Props = {
   data: OnboardingFormData;
   update: (fields: Partial<OnboardingFormData>) => void;
-  onBack: () => void;
   onSubmit: () => void;
 };
 
@@ -26,7 +25,7 @@ const trackingOptions = [
   "monthly",
 ] as const;
 
-export default function Step4_Experience({ data, update, onBack, onSubmit }: Step4Props) {
+export default function Step4_Experience({ data, update, onSubmit }: Step4Props) {
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
@@ -78,7 +77,7 @@ export default function Step4_Experience({ data, update, onBack, onSubmit }: Ste
       <div className="flex justify-between pt-6">
         <button
           type="button"
-          onClick={onBack}
+          onClick={() => {}}
           className="px-6 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-100"
         >
           Back

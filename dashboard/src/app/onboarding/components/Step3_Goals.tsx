@@ -11,8 +11,6 @@ import { OnboardingFormData } from "../types/onboarding";
 type Step3Props = {
   data: OnboardingFormData;
   update: (fields: Partial<OnboardingFormData>) => void;
-  onNext: () => void;
-  onBack: () => void;
 };
 
 // TDEE Estimate using Mifflin-St Jeor
@@ -34,7 +32,7 @@ const calculateTDEE = (
   return Math.round(bmr * (multiplier[activityLevel] || 1.2));
 };
 
-export default function Step3_Goals({ data, update, onNext, onBack }: Step3Props) {
+export default function Step3_Goals({ data, update }: Step3Props) {
   const [error, setError] = useState("");
   const [tdee, setTDEE] = useState<number | null>(null);
 
@@ -66,9 +64,6 @@ export default function Step3_Goals({ data, update, onNext, onBack }: Step3Props
     return true;
   };
 
-  const handleNext = () => {
-    if (validate()) onNext();
-  };
 
   return (
     <div className="space-y-8">
@@ -146,14 +141,14 @@ export default function Step3_Goals({ data, update, onNext, onBack }: Step3Props
       <div className="flex justify-between pt-6">
         <button
           type="button"
-          onClick={onBack}
+          onClick={() => {}}
           className="px-6 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-100"
         >
           Back
         </button>
         <button
           type="button"
-          onClick={handleNext}
+          onClick={() => {}}
           className="px-6 py-2 bg-black text-white rounded-md text-sm hover:bg-black/80"
         >
           Continue

@@ -11,8 +11,6 @@ import { OnboardingFormData } from "../types/onboarding";
 type Step2Props = {
   data: OnboardingFormData;
   update: (fields: Partial<OnboardingFormData>) => void;
-  onNext: () => void;
-  onBack: () => void;
 };
 
 const gymOptions = [
@@ -33,7 +31,7 @@ const healthOptions = [
 const workoutLocations = ["Gym", "Home", "Both", "Skip"];
 const workoutTimes = ["Morning", "Afternoon", "Evening", "Any time", "Skip"];
 
-export default function Step2_Training({ data, update, onNext, onBack }: Step2Props) {
+export default function Step2_Training({ data, update }: Step2Props) {
   const [error, setError] = useState("");
 
   const validate = () => {
@@ -49,9 +47,6 @@ export default function Step2_Training({ data, update, onNext, onBack }: Step2Pr
     return true;
   };
 
-  const handleNext = () => {
-    if (validate()) onNext();
-  };
 
   return (
     <div className="space-y-8">
@@ -122,14 +117,14 @@ export default function Step2_Training({ data, update, onNext, onBack }: Step2Pr
       <div className="flex justify-between pt-6">
         <button
           type="button"
-          onClick={onBack}
+          onClick={() => {}}
           className="px-6 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-100"
         >
           Back
         </button>
         <button
           type="button"
-          onClick={handleNext}
+          onClick={() => {}}
           className="px-6 py-2 bg-black text-white rounded-md text-sm hover:bg-black/80"
         >
           Continue

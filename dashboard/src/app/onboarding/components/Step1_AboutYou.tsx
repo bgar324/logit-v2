@@ -13,10 +13,9 @@ import { OnboardingFormData } from "../types/onboarding";
 type Step1Props = {
   data: OnboardingFormData;
   update: (fields: Partial<OnboardingFormData>) => void;
-  onNext: () => void;
 };
 
-export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
+export default function Step1_AboutYou({ data, update }: Step1Props) {
   const [skippedBodyFat, setSkippedBodyFat] = useState(false);
 
   return (
@@ -179,7 +178,7 @@ export default function Step1_AboutYou({ data, update, onNext }: Step1Props) {
         <div className="pt-4">
           <button
             type="button"
-            onClick={onNext}
+            onClick={() => {}}
             className="bg-black text-white px-6 py-2 rounded-md hover:bg-black/80 transition"
           >
             Continue

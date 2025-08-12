@@ -15,23 +15,10 @@ import { OnboardingFormData } from "./types/onboarding";
 export default function OnboardingPage() {
   const [isSignUp, setIsSignUp] = useState(true);
   const [showOnboardingForm, setShowOnboardingForm] = useState(false);
-
-  // useEffect(() => {
-  //   const checkSession = async () => {
-  //     const { data } = await supabase.auth.getSession();
-  //     if (data.session?.user) {
-  //       setIsSignUp(false);
-  //     } else {
-  //       setIsSignUp(true);
-  //     }
-  //   };
-
-  //   checkSession();
-  // }, [supabase]);
+  const [currentStep, setCurrentStep] = useState(1);
   const supabase = createClient();
   const router = useRouter();
 
-  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingFormData>({
     height: null,
     weight: null,
@@ -55,9 +42,6 @@ export default function OnboardingPage() {
   const updateForm = (fields: Partial<typeof formData>) =>
     setFormData((prev) => ({ ...prev, ...fields }));
 
-  const nextStep = () => setStep((s) => Math.min(s + 1, 4));
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
-
   const handleFinalSubmit = async () => {
     const { data: user } = await supabase.auth.getUser();
     const userId = user?.user?.id;
@@ -77,6 +61,10 @@ export default function OnboardingPage() {
     router.push("/dashboard");
   };
 
+  const handleStepChange = (step: number) => {
+    setCurrentStep(step);
+  };
+
   return (
     <div className="min-h-screen bg-black p-2 overflow-hidden">
       <div className="min-h-[calc(100vh-1rem)] flex flex-row">
@@ -86,38 +74,24 @@ export default function OnboardingPage() {
         />
         <AnimatePresence>
           {showOnboardingForm && (
-            <Onboarding step={step}>
-              {step === 1 && (
-                <Step1_AboutYou
-                  data={formData}
-                  update={updateForm}
-                  onNext={nextStep}
-                />
-              )}
-              {step === 2 && (
-                <Step2_Training
-                  data={formData}
-                  update={updateForm}
-                  onNext={nextStep}
-                  onBack={prevStep}
-                />
-              )}
-              {step === 3 && (
-                <Step3_Goals
-                  data={formData}
-                  update={updateForm}
-                  onNext={nextStep}
-                  onBack={prevStep}
-                />
-              )}
-              {step === 4 && (
-                <Step4_Experience
-                  data={formData}
-                  update={updateForm}
-                  onBack={prevStep}
-                  onSubmit={handleFinalSubmit}
-                />
-              )}
+            <Onboarding onStepChange={handleStepChange}>
+              <Step1_AboutYou
+                data={formData}
+                update={updateForm}
+              />
+              <Step2_Training
+                data={formData}
+                update={updateForm}
+              />
+              <Step3_Goals
+                data={formData}
+                update={updateForm}
+              />
+              <Step4_Experience
+                data={formData}
+                update={updateForm}
+                onSubmit={handleFinalSubmit}
+              />
             </Onboarding>
           )}
         </AnimatePresence>
